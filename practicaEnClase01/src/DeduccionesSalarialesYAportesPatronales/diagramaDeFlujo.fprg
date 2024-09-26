@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="DeduccionesYAportes"/>
+        <attribute name="authors" value="sysadmin"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-09-26 03:58:56 PM"/>
+        <attribute name="created" value="c3lzYWRtaW47REVTS1RPUC1SNlQzQjZDOzIwMjQtMDktMjY7MDM6MjA6MzEgUE07MzE5MQ=="/>
+        <attribute name="edited" value="c3lzYWRtaW47REVTS1RPUC1SNlQzQjZDOzIwMjQtMDktMjY7MDM6NTg6NTYgUE07NjszMzIy"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="aporteObreroPorcentaje, aporteSolidaristaPatronalPorcentaje, semAportePatronPorcentaje, semDeduccionTrabajadorPorcentaje, IVMAportePatronPorcentaje, IVMDeduccionTrabajadorPorcentaje" type="Real" array="False" size=""/>
+            <assign variable="aporteObreroPorcentaje" expression="0.05"/>
+            <assign variable="aporteSolidaristaPatronalPorcentaje" expression="0.0533"/>
+            <assign variable="semAportePatronPorcentaje" expression="0.0925"/>
+            <assign variable="semDeduccionTrabajadorPorcentaje" expression="0.055"/>
+            <assign variable="IVMAportePatronPorcentaje" expression="0.0542"/>
+            <assign variable="IVMDeduccionTrabajadorPorcentaje" expression="0.0417"/>
+            <declare name="nombre, apellido, cedula" type="String" array="False" size=""/>
+            <declare name="salarioBrutoMensual" type="Real" array="False" size=""/>
+            <output expression="&quot;Ingrese nombre&quot;" newline="True"/>
+            <input variable="nombre"/>
+            <output expression="&quot;Ingrese Apellido&quot;" newline="True"/>
+            <input variable="apellido"/>
+            <output expression="&quot;Ingrese cedula&quot;" newline="True"/>
+            <input variable="cedula"/>
+            <output expression="&quot;Ingrese su salario bruto mensual&quot;" newline="True"/>
+            <input variable="salarioBrutoMensual"/>
+            <declare name="montoDeduccionTrabajadorSEM" type="Real" array="False" size=""/>
+            <assign variable="montoDeduccionTrabajadorSEM" expression="salarioBrutoMensual * semDeduccionTrabajadorPorcentaje"/>
+            <declare name="montoDeduccionTrabajadorIVM" type="Real" array="False" size=""/>
+            <assign variable="montoDeduccionTrabajadorIVM" expression="salarioBrutoMensual * IVMDeduccionTrabajadorPorcentaje"/>
+            <declare name="totalDeduccionesCCSS" type="Real" array="False" size=""/>
+            <assign variable="totalDeduccionesCCSS" expression="montoDeduccionTrabajadorSEM + montoDeduccionTrabajadorIVM"/>
+            <declare name="montoDeduccionSolidarista" type="Real" array="False" size=""/>
+            <assign variable="montoDeduccionSolidarista" expression="salarioBrutoMensual * aporteObreroPorcentaje"/>
+            <declare name="totalDeduccionesTrabajador" type="Real" array="False" size=""/>
+            <assign variable="totalDeduccionesTrabajador" expression="totalDeduccionesCCSS + montoDeduccionSolidarista"/>
+            <declare name="salarioNeto" type="Real" array="False" size=""/>
+            <assign variable="salarioNeto" expression="salarioBrutoMensual - totalDeduccionesTrabajador"/>
+            <declare name="montoAportePatronoSEM" type="Real" array="False" size=""/>
+            <assign variable="montoAportePatronoSEM" expression="salarioBrutoMensual * semAportePatronPorcentaje"/>
+            <declare name="montoAportePatronoIVM" type="Real" array="False" size=""/>
+            <assign variable="montoAportePatronoIVM" expression="salarioBrutoMensual * IVMAportePatronPorcentaje"/>
+            <declare name="totalAporteCCSS" type="Real" array="False" size=""/>
+            <assign variable="totalAporteCCSS" expression="montoAportePatronoSEM + montoAportePatronoIVM"/>
+            <declare name="montoAportePatronoSolidarista" type="Real" array="False" size=""/>
+            <assign variable="montoAportePatronoSolidarista" expression="salarioBrutoMensual * aporteSolidaristaPatronalPorcentaje"/>
+            <declare name="totalAportesPatrono" type="Real" array="False" size=""/>
+            <assign variable="totalAportesPatrono" expression="totalAporteCCSS + montoAportePatronoSolidarista"/>
+            <comment text="Boleta Trabajador"/>
+            <output expression="&quot;Nombre: &quot; &amp; nombre &amp; &quot;Apellido: &quot; &amp; apellido &amp; &quot;Cedula: &quot; &amp; cedula &amp; &quot;Salario bruto mensual: &quot; &amp; salarioBrutoMensual &amp; &quot;Deduccion SEM: &quot; &amp; montoDeduccionTrabajadorSEM &amp; &quot;Deduccion IVM: &quot; &amp; montoDeduccionTrabajadorIVM &amp; &quot; Total deduccion CCSS: &quot; &amp; totalDeduccionesCCSS &amp; &quot;Deduccion solidarista: &quot; &amp; montoDeduccionSolidarista &amp; &quot;Total deducciones: &quot; &amp; totalDeduccionesTrabajador &amp; &quot;Salario neto: &quot; &amp; salarioNeto" newline="True"/>
+            <comment text="Boleta Patrono"/>
+            <output expression="&quot;Aporte SEM: &quot; &amp; montoAportePatronoSEM &amp; &quot;Aporte IVM: &quot; &amp; montoAportePatronoIVM &amp; &quot;Total aportes a CCSS: &quot; &amp; totalAporteCCSS &amp; &quot;Aporte Solidarista: &quot; &amp; montoAportePatronoSolidarista &amp; &quot;Total aportes: &quot; &amp; totalAportesPatrono" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
